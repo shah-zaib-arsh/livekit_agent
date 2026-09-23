@@ -113,7 +113,7 @@ git clone https://github.com/shah-zaib-arsh/shah-zaib-arsh-livekit_agent.git
 Move into the project directory:
 
 ```bash
-cd shah-zaib-arsh-livekit_agent
+cd livekit_agent
 ```
 
 ---
@@ -145,7 +145,7 @@ in the project root.
 Your project should look like this:
 
 ```text
-shah-zaib-arsh-livekit_agent/
+livekit_agent/
 │
 ├── .env
 ├── README.md
@@ -234,7 +234,7 @@ Open **Terminal 2**.
 Make sure you are inside the same project directory:
 
 ```bash
-cd shah-zaib-arsh-livekit_agent
+cd livekit_agent
 ```
 
 Run:
@@ -625,7 +625,7 @@ For a quick setup, the main commands are:
 ```bash
 git clone https://github.com/shah-zaib-arsh/shah-zaib-arsh-livekit_agent.git
 
-cd shah-zaib-arsh-livekit_agent
+cd livekit_agent
 
 uv sync
 ```
@@ -680,6 +680,9 @@ Start Talking
 
 GitHub:
 https://github.com/shah-zaib-arsh
+
+Gmail:
+mrshahzaib903@gmail.com
 
 LinkedIn:
 https://www.linkedin.com/in/muhammad-shahzaib-arshed/
