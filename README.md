@@ -52,7 +52,7 @@ LiveKit Inference provides access to supported STT, LLM, and TTS providers throu
 # 📁 Project Structure
 
 ```text
-shah-zaib-arsh-livekit_agent/
+livekit_agent/
 │
 ├── README.md
 ├── agent.py
