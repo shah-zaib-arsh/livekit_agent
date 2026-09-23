@@ -1,43 +1,55 @@
 # 🎙️ LiveKit Voice AI Assistant
 
-A real-time voice AI assistant built with **LiveKit Agents**, **Python**, and **Gradio**. The project provides a browser-based interface where users can connect their microphone, join a LiveKit room, and communicate with an AI voice assistant.
+A real-time voice AI assistant built with **LiveKit Agents**, **Python**, and **Gradio**.
 
-The application combines **speech-to-text**, **LLM-based responses**, **text-to-speech**, microphone visualization, and LiveKit real-time communication.
+This project provides a browser-based voice interface where users can connect their microphone, join a LiveKit room, and talk with an AI voice assistant in real time.
+
+The application combines speech-to-text, an LLM, text-to-speech, LiveKit real-time communication, microphone visualization, and browser audio controls.
+
+---
 
 ## ✨ Features
 
-* 🎙️ Real-time voice conversation with an AI assistant
+* 🎙️ Real-time voice conversation
 * 🔊 Speech-to-text using AssemblyAI
 * 🧠 AI responses using Google Gemma
 * 🗣️ Text-to-speech using Fish Audio
 * 🎧 Real-time audio communication through LiveKit
-* 🎤 Browser microphone permission and input handling
+* 🎤 Browser microphone support
 * 📊 Live microphone waveform visualizer
 * 🔇 Mute and unmute microphone
-* 🔊 Enable AI audio playback
-* 🛑 Disconnect from the LiveKit room
+* 🔊 AI audio playback control
+* 🛑 Disconnect from LiveKit room
 * 🏠 Automatic unique room generation
-* 👤 Custom user name support
-* 🌐 Gradio-based web interface
-* 🛡️ Environment-variable based LiveKit credentials
-* 🎛️ AI voice processing with `ai-coustics`
+* 👤 Custom user name
+* 🌐 Gradio web interface
+* 🛡️ Environment-variable based credentials
+* 🎛️ AI audio enhancement using ai-coustics
 
-## 🛠️ Technologies Used
+---
 
-* **Python 3.14**
-* **LiveKit Agents**
-* **LiveKit API**
-* **Gradio**
-* **AssemblyAI**
-* **Google Gemma**
-* **Fish Audio**
-* **ai-coustics**
-* **JavaScript**
-* **HTML/CSS**
-* **uv**
-* **python-dotenv**
+# 🛠️ Technologies Used
 
-## 📁 Project Structure
+* Python 3.14
+* LiveKit Agents
+* LiveKit API
+* LiveKit Inference
+* Gradio
+* AssemblyAI
+* Google Gemma
+* Fish Audio
+* ai-coustics
+* JavaScript
+* HTML
+* CSS
+* uv
+* python-dotenv
+
+LiveKit Inference provides access to supported STT, LLM, and TTS providers through LiveKit Cloud without requiring separate provider plugins for the models used in this project.
+
+---
+
+# 📁 Project Structure
 
 ```text
 shah-zaib-arsh-livekit_agent/
@@ -53,30 +65,132 @@ shah-zaib-arsh-livekit_agent/
         └── __init__.py
 ```
 
-## ⚙️ Requirements
+---
 
-Before running the project, make sure you have:
+# ✅ Requirements
+
+Before running the project, install the following:
 
 * Python 3.14
 * uv
 * A LiveKit Cloud project
+* LiveKit URL
 * LiveKit API Key
 * LiveKit API Secret
-* LiveKit WebSocket URL
+* A modern web browser
+* Microphone
 
-## 🔐 Environment Variables
+The project uses LiveKit Inference for the configured speech-to-text, LLM, and text-to-speech models. The inference API reads the LiveKit credentials from environment variables when they are not supplied directly in code.
 
-Create a `.env` file in the project root:
+---
+
+# 📥 1. Install uv
+
+This project uses **uv** for Python environment and dependency management.
+
+Check whether uv is already installed:
+
+```bash
+uv --version
+```
+
+If the command works, continue to the next step.
+
+If you do not have uv installed, install it from the official uv documentation:
+
+https://docs.astral.sh/uv/
+
+---
+
+# 📥 2. Clone the Repository
+
+Open **CMD** or **PowerShell**:
+
+```bash
+git clone https://github.com/shah-zaib-arsh/shah-zaib-arsh-livekit_agent.git
+```
+
+Move into the project directory:
+
+```bash
+cd shah-zaib-arsh-livekit_agent
+```
+
+---
+
+# 📦 3. Install Project Dependencies
+
+Run:
+
+```bash
+uv sync
+```
+
+This creates the project's virtual environment and installs the dependencies defined in `pyproject.toml`.
+
+After installation, you should have a `.venv` folder.
+
+---
+
+# 🔐 4. Create the `.env` File
+
+Create a file named:
+
+```text
+.env
+```
+
+in the project root.
+
+Your project should look like this:
+
+```text
+shah-zaib-arsh-livekit_agent/
+│
+├── .env
+├── README.md
+├── agent.py
+├── app.py
+├── pyproject.toml
+├── .python-version
+└── src/
+```
+
+Add your LiveKit credentials:
 
 ```env
-LIVEKIT_URL=wss://your-livekit-project.livekit.cloud
+LIVEKIT_URL=wss://your-project.livekit.cloud
 LIVEKIT_API_KEY=your_livekit_api_key
 LIVEKIT_API_SECRET=your_livekit_api_secret
 ```
 
-Do not upload your `.env` file or expose your LiveKit API credentials on GitHub.
+Replace the values with your actual LiveKit Cloud credentials.
 
-Add this to `.gitignore`:
+For example:
+
+```env
+LIVEKIT_URL=wss://example-project.livekit.cloud
+LIVEKIT_API_KEY=your_actual_key
+LIVEKIT_API_SECRET=your_actual_secret
+```
+
+### Important
+
+Never upload your `.env` file to GitHub.
+
+Your `.env` file contains secret credentials.
+
+---
+
+# 🔒 5. Create `.gitignore`
+
+Create a file named:
+
+```text
+.gitignore
+```
+
+Add:
 
 ```gitignore
 .env
@@ -85,151 +199,406 @@ __pycache__/
 *.pyc
 ```
 
-## 🚀 Installation
+This prevents private credentials and local Python files from being committed to GitHub.
 
-Clone the repository:
+---
 
-```bash
-git clone https://github.com/shah-zaib-arsh/shah-zaib-arsh-livekit_agent.git
-cd shah-zaib-arsh-livekit_agent
-```
+# ▶️ 6. Start the LiveKit Voice Agent
 
-Create the virtual environment and install dependencies:
+Open **Terminal 1** inside the project folder.
 
-```bash
-uv sync
-```
-
-Activate the environment on Windows CMD:
-
-```cmd
-.venv\Scripts\activate.bat
-```
-
-For PowerShell:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-## ▶️ Run the Voice Agent
-
-Start the LiveKit agent:
+Run:
 
 ```bash
 uv run agent.py dev
 ```
 
-The agent connects to LiveKit and waits for users to join the configured room.
+Your `agent.py` uses:
 
-## 🌐 Run the Gradio Web Interface
+```python
+agents.cli.run_app(server)
+```
 
-Open another terminal and run:
+which provides the Python agent command interface used by commands such as `uv run agent.py dev`.
+
+Keep this terminal running.
+
+The agent needs to be running before you try to connect from the browser.
+
+---
+
+# 🌐 7. Start the Gradio Web App
+
+Open **Terminal 2**.
+
+Make sure you are inside the same project directory:
+
+```bash
+cd shah-zaib-arsh-livekit_agent
+```
+
+Run:
 
 ```bash
 uv run app.py
 ```
 
-The Gradio application will be available at:
+Your Gradio application will start on:
 
 ```text
 http://127.0.0.1:7860
 ```
 
-Open the address in your browser.
+Gradio's `Blocks` interface is served using the `launch()` method, which is what this project uses.
 
-## 🎤 How It Works
+---
+
+# 🌍 8. Open the Application
+
+Open your browser and go to:
 
 ```text
-User
-  │
-  ▼
-Gradio Web Interface
-  │
-  ▼
-Create LiveKit Access Token
-  │
-  ▼
-Join LiveKit Room
-  │
-  ├── Microphone Audio
-  │        │
-  │        ▼
-  │   LiveKit Audio Stream
-  │        │
-  │        ▼
-  │     AI Agent
-  │
-  └── AI Audio Response
-           │
-           ▼
-      User's Browser
+http://127.0.0.1:7860
 ```
 
-## 🧠 AI Agent Pipeline
+You should see:
 
-The voice agent uses the following pipeline:
+```text
+🎙️ LiveKit Voice AI Assistant
+
+Connect your microphone and talk to your LiveKit AI voice agent.
+```
+
+---
+
+# 🎤 9. Connect to the Voice Agent
+
+Follow these steps:
+
+### Step 1
+
+Enter your name.
+
+Example:
+
+```text
+Shahzaib
+```
+
+### Step 2
+
+You can leave the **Room Name** empty.
+
+The application will automatically generate a unique room.
+
+Or enter your own room name:
+
+```text
+my-test-room
+```
+
+### Step 3
+
+Click:
+
+```text
+Create Voice Session
+```
+
+### Step 4
+
+Click:
+
+```text
+Connect
+```
+
+### Step 5
+
+When the browser asks for microphone permission, click:
+
+```text
+Allow
+```
+
+### Step 6
+
+Click:
+
+```text
+Enable Audio
+```
+
+### Step 7
+
+Speak into your microphone.
+
+The AI assistant should receive your voice, process it, and respond with audio.
+
+---
+
+# 🔄 How the Project Works
+
+```text
+                    USER
+                      │
+                      ▼
+             ┌─────────────────┐
+             │ Gradio Web App  │
+             └────────┬────────┘
+                      │
+                      ▼
+             Create LiveKit Token
+                      │
+                      ▼
+             ┌─────────────────┐
+             │  LiveKit Room   │
+             └────────┬────────┘
+                      │
+             Microphone Audio
+                      │
+                      ▼
+             ┌─────────────────┐
+             │   AI Agent      │
+             │    agent.py     │
+             └────────┬────────┘
+                      │
+        ┌─────────────┼─────────────┐
+        ▼             ▼             ▼
+      STT            LLM           TTS
+  AssemblyAI      Google Gemma   Fish Audio
+        │             │             │
+        └─────────────┼─────────────┘
+                      │
+                      ▼
+              AI Voice Response
+                      │
+                      ▼
+                 LiveKit
+                      │
+                      ▼
+                  Browser
+```
+
+---
+
+# 🧠 AI Voice Pipeline
+
+The current `agent.py` uses:
 
 ```text
 Microphone
     ↓
 LiveKit
     ↓
-AssemblyAI Speech-to-Text
+AssemblyAI Universal 3.5 Pro
     ↓
-Google Gemma LLM
+Google Gemma 4 31B IT
     ↓
-Fish Audio Text-to-Speech
+Fish Audio S2.1 Pro
     ↓
 LiveKit
     ↓
 User Speaker
 ```
 
-## 🎙️ Assistant Behavior
+The model configuration in `agent.py` is:
 
-The AI assistant is designed to be:
+```python
+stt=inference.STT(
+    model="assemblyai/universal-3-5-pro",
+    language="en"
+)
 
-* Helpful
-* Friendly
-* Concise
-* Informative
-* Conversational
+llm=inference.LLM(
+    model="google/gemma-4-31b-it"
+)
 
-It avoids unnecessary complex formatting, emojis, asterisks, and excessive punctuation during voice responses.
-
-## 🔊 Browser Audio
-
-The web interface includes:
-
-* Microphone permission handling
-* Live microphone waveform
-* Microphone mute/unmute controls
-* AI audio playback activation
-* Remote audio track handling
-* Connection and disconnection status
-
-The browser may ask for microphone permission when the **Connect** button is pressed.
-
-## 🔧 Configuration
-
-The LiveKit agent is configured in `agent.py`.
-
-The web interface and LiveKit token generation are handled by `app.py`.
-
-The project uses the LiveKit agent name:
-
-```text
-my-agent
+tts=inference.TTS(
+    model="fishaudio/s2.1-pro",
+    voice="fa4c9eb3dccc4806b382b40d61c6b10a"
+)
 ```
 
-Make sure the agent name used by the web application matches the agent configuration.
+These model descriptors follow the LiveKit Inference model format.
 
-## 🔒 Security
+---
 
-Never commit sensitive credentials to GitHub.
+# 🎙️ Microphone Features
 
-Do not upload:
+The browser interface includes:
+
+* Microphone permission
+* Microphone publishing to LiveKit
+* Live waveform visualization
+* Microphone status
+* Mute
+* Unmute
+* AI audio playback
+* Disconnect
+* Remote audio track handling
+
+When you speak, the microphone waveform should respond to your voice.
+
+---
+
+# 🔊 Audio Controls
+
+The application provides four main controls:
+
+```text
+Connect
+Mute / Unmute
+Enable Audio
+Disconnect
+```
+
+### Connect
+
+Connects your browser to the LiveKit room.
+
+### Mute
+
+Stops microphone audio from being published.
+
+### Enable Audio
+
+Enables browser playback for the AI assistant's voice.
+
+### Disconnect
+
+Leaves the LiveKit room and stops the current voice session.
+
+---
+
+# 🧪 Optional: Test the Agent Without the Gradio UI
+
+You can also run the Python agent directly in console mode:
+
+```bash
+uv run agent.py console
+```
+
+This is useful for checking the agent independently from the browser UI.
+
+For development mode:
+
+```bash
+uv run agent.py dev
+```
+
+The LiveKit CLI documentation also describes `lk agent dev` as the newer development command, while the Python `run_app()` interface used by this project is being phased out in favor of the LiveKit CLI.
+
+For this repository, `uv run agent.py dev` matches the current project code and is the simplest command to use.
+
+---
+
+# 🐛 Troubleshooting
+
+## `LIVEKIT_URL is missing`
+
+Check your `.env` file:
+
+```env
+LIVEKIT_URL=wss://your-project.livekit.cloud
+```
+
+Make sure the `.env` file is in the same directory as `app.py`.
+
+---
+
+## `LIVEKIT_API_KEY or LIVEKIT_API_SECRET is missing`
+
+Check that both values exist:
+
+```env
+LIVEKIT_API_KEY=your_key
+LIVEKIT_API_SECRET=your_secret
+```
+
+---
+
+## Agent does not connect
+
+Make sure Terminal 1 is running:
+
+```bash
+uv run agent.py dev
+```
+
+Then run the Gradio application in Terminal 2:
+
+```bash
+uv run app.py
+```
+
+Both processes need to be running.
+
+---
+
+## Browser does not access the microphone
+
+Check your browser's site permissions and allow microphone access for:
+
+```text
+http://127.0.0.1:7860
+```
+
+Then refresh the page and try connecting again.
+
+---
+
+## AI voice is not playing
+
+After connecting, click:
+
+```text
+Enable Audio
+```
+
+Some browsers require a user interaction before audio playback is allowed.
+
+---
+
+## `uv` command not found
+
+Install uv and restart CMD or PowerShell.
+
+Then check:
+
+```bash
+uv --version
+```
+
+---
+
+## Dependency errors
+
+Run:
+
+```bash
+uv sync
+```
+
+again.
+
+You can also verify the Python version:
+
+```bash
+python --version
+```
+
+The project is configured for:
+
+```text
+Python 3.14
+```
+
+---
+
+# 🔒 Security
+
+Never commit these files or secrets:
 
 ```text
 .env
@@ -239,22 +608,73 @@ LIVEKIT_API_SECRET
 
 Use environment variables instead.
 
-## 📌 Future Improvements
+Before pushing the repository:
 
-Possible improvements for the project include:
+```bash
+git status
+```
 
-* Conversation history
-* User authentication
-* Multiple AI personalities
-* Voice selection
-* Better error handling
-* Chat transcript display
-* Mobile-friendly voice controls
-* Deployment to a public server
-* Additional AI models
-* Persistent conversation storage
+Make sure `.env` is not listed as a file to commit.
 
-## 👨‍💻 Author
+---
+
+# 🚀 Quick Start
+
+For a quick setup, the main commands are:
+
+```bash
+git clone https://github.com/shah-zaib-arsh/shah-zaib-arsh-livekit_agent.git
+
+cd shah-zaib-arsh-livekit_agent
+
+uv sync
+```
+
+Create `.env`:
+
+```env
+LIVEKIT_URL=wss://your-project.livekit.cloud
+LIVEKIT_API_KEY=your_livekit_api_key
+LIVEKIT_API_SECRET=your_livekit_api_secret
+```
+
+Then open two terminals.
+
+### Terminal 1
+
+```bash
+uv run agent.py dev
+```
+
+### Terminal 2
+
+```bash
+uv run app.py
+```
+
+Open:
+
+```text
+http://127.0.0.1:7860
+```
+
+Then:
+
+```text
+Create Voice Session
+        ↓
+Connect
+        ↓
+Allow Microphone
+        ↓
+Enable Audio
+        ↓
+Start Talking
+```
+
+---
+
+# 👨‍💻 Author
 
 **Muhammad Shahzaib**
 
@@ -264,9 +684,29 @@ https://github.com/shah-zaib-arsh
 LinkedIn:
 https://www.linkedin.com/in/muhammad-shahzaib-arshed/
 
-## 📄 License
+---
 
-This project is created for learning, experimentation, and educational purposes.
+# 📌 Future Improvements
+
+Possible future improvements:
+
+* Conversation history
+* Chat transcript display
+* User authentication
+* Multiple AI voices
+* Multiple AI personalities
+* Voice selection
+* Persistent conversation storage
+* Better mobile support
+* Public deployment
+* Additional AI models
+* Advanced analytics and monitoring
+
+---
+
+# 📄 License
+
+This project was created for learning, experimentation, and educational purposes.
 
 ---
 
